@@ -1,0 +1,134 @@
+.settings__row {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    &:last-child {
+        margin-bottom: 10px;
+    }
+}
+
+.settings__column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+    label {
+        margin-bottom: 15px;
+        color:  #ebebeb;
+    }
+}
+
+.text-field {
+    outline: none;
+    border: 1px solid #c7c7c7;
+    border-radius: 5px;
+    padding: 10px 5px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
+}
+
+.settings__button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
+    font-weight: 600;
+    transition: .1s ease-in;
+    cursor: pointer;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.settings__wrapper {
+    width: 100%;
+    height: 100%;
+
+    .settings__heading {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 50px;
+        font-weight: 600;
+        font-size: 3rem;
+        color: #ebebeb;
+    }
+    
+    .settings__placeholder-img {
+        height: 150px;
+        width: 150px;
+        border-radius: 15%;
+    }
+
+    #settings__image-file {
+        color: transparent;
+        position: relative;
+        right: 35px;
+        top: 10px;
+        z-index: 10;
+        width: 30px;
+        height: 30px;
+        outline: none;
+
+        &::-webkit-file-upload-button {
+        visibility: hidden;
+        }
+
+        &::after {
+            content: '+';
+            color: black;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            bottom: 75%;
+            display: inline-block;
+            outline: none;
+            cursor: pointer;
+            font-weight: 100;
+            font-size: 2.5rem;
+        }
+    }
+
+    #settings__project-description {
+        width: 80%;
+    }
+
+    #settings__project-collaborators {
+        width: 80%;
+
+        .settings__select-colaborator {
+            min-width: 150px;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
+        }
+    }
+
+    .settings__colaborators-list-wrapper {
+        width: 80%;
+
+        .settings__colaborators-list{
+            list-style: none;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
+            background-color: #ebebeb;
+            overflow:hidden; 
+            overflow-y:scroll;
+            max-height: 200px;
+
+            li {
+                display: flex;
+                justify-content: space-around;
+                flex-wrap: wrap;
+                margin: 10px auto;
+                padding: 10px 5px;
+                background-color: #c4c4c4;
+            }
+            
+            img {
+                width: 35px;
+            }
+        }
+    }
+}
