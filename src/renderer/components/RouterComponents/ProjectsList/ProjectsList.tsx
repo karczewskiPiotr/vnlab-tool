@@ -14,7 +14,7 @@ import { Subviews } from '../../../constants/Views';
 import { useDispatch } from 'react-redux';
 import { remove } from 'isomorphic-git';
 
-const projects: IProject[] = [
+export const projects: IProject[] = [
   {
     id: 0,
     image: article_icon,
@@ -26,7 +26,7 @@ const projects: IProject[] = [
     last_modified_by: '',
     technologies: [],
     coauthors: [],
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non rhoncus augue. Maecenas et felis eget velit scelerisque dictum sed vel leo. Etiam ipsum sem, suscipit eu nunc ut, mollis molestie erat. Duis fringilla, tellus bibendum tristique sodales, arcu nibh suscipit nunc, eget cursus justo mauris sed urna. Donec imperdiet ultricies nisl, vitae viverra quam vestibulum a. Aliquam sapien diam, pulvinar ac ex id, feugiat volutpat urna. Integer id fringilla risus, vel sodales tellus. Quisque ac neque metus. Aenean at mi molestie, bibendum est sed, viverra metus. Maecenas mauris est, tincidunt eu nunc in, sodales feugiat massa. Fusce euismod ut ligula in accumsan. Morbi consequat lorem in odio lacinia ultricies. In et nisl et ligula malesuada posuere.',
   },
   {
     id: 1,
@@ -39,7 +39,7 @@ const projects: IProject[] = [
     last_modified_by: '',
     technologies: [],
     coauthors: [],
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non rhoncus augue. Maecenas et felis eget velit scelerisque dictum sed vel leo. Etiam ipsum sem, suscipit eu nunc ut, mollis molestie erat. Duis fringilla, tellus bibendum tristique sodales, arcu nibh suscipit nunc, eget cursus justo mauris sed urna. Donec imperdiet ultricies nisl, vitae viverra quam vestibulum a. Aliquam sapien diam, pulvinar ac ex id, feugiat volutpat urna. Integer id fringilla risus, vel sodales tellus. Quisque ac neque metus. Aenean at mi molestie, bibendum est sed, viverra metus. Maecenas mauris est, tincidunt eu nunc in, sodales feugiat massa. Fusce euismod ut ligula in accumsan. Morbi consequat lorem in odio lacinia ultricies. In et nisl et ligula malesuada posuere.',
   },
   {
     id: 2,
@@ -52,7 +52,7 @@ const projects: IProject[] = [
     last_modified_by: '',
     technologies: [],
     coauthors: [],
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non rhoncus augue. Maecenas et felis eget velit scelerisque dictum sed vel leo. Etiam ipsum sem, suscipit eu nunc ut, mollis molestie erat. Duis fringilla, tellus bibendum tristique sodales, arcu nibh suscipit nunc, eget cursus justo mauris sed urna. Donec imperdiet ultricies nisl, vitae viverra quam vestibulum a. Aliquam sapien diam, pulvinar ac ex id, feugiat volutpat urna. Integer id fringilla risus, vel sodales tellus. Quisque ac neque metus. Aenean at mi molestie, bibendum est sed, viverra metus. Maecenas mauris est, tincidunt eu nunc in, sodales feugiat massa. Fusce euismod ut ligula in accumsan. Morbi consequat lorem in odio lacinia ultricies. In et nisl et ligula malesuada posuere.',
   },
   {
     id: 3,
@@ -65,7 +65,7 @@ const projects: IProject[] = [
     last_modified_by: '',
     technologies: [],
     coauthors: [],
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non rhoncus augue. Maecenas et felis eget velit scelerisque dictum sed vel leo. Etiam ipsum sem, suscipit eu nunc ut, mollis molestie erat. Duis fringilla, tellus bibendum tristique sodales, arcu nibh suscipit nunc, eget cursus justo mauris sed urna. Donec imperdiet ultricies nisl, vitae viverra quam vestibulum a. Aliquam sapien diam, pulvinar ac ex id, feugiat volutpat urna. Integer id fringilla risus, vel sodales tellus. Quisque ac neque metus. Aenean at mi molestie, bibendum est sed, viverra metus. Maecenas mauris est, tincidunt eu nunc in, sodales feugiat massa. Fusce euismod ut ligula in accumsan. Morbi consequat lorem in odio lacinia ultricies. In et nisl et ligula malesuada posuere.',
   },
   {
     id: 4,
@@ -78,7 +78,7 @@ const projects: IProject[] = [
     last_modified_by: '',
     technologies: [],
     coauthors: [],
-    description: '',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse non rhoncus augue. Maecenas et felis eget velit scelerisque dictum sed vel leo. Etiam ipsum sem, suscipit eu nunc ut, mollis molestie erat. Duis fringilla, tellus bibendum tristique sodales, arcu nibh suscipit nunc, eget cursus justo mauris sed urna. Donec imperdiet ultricies nisl, vitae viverra quam vestibulum a. Aliquam sapien diam, pulvinar ac ex id, feugiat volutpat urna. Integer id fringilla risus, vel sodales tellus. Quisque ac neque metus. Aenean at mi molestie, bibendum est sed, viverra metus. Maecenas mauris est, tincidunt eu nunc in, sodales feugiat massa. Fusce euismod ut ligula in accumsan. Morbi consequat lorem in odio lacinia ultricies. In et nisl et ligula malesuada posuere.',
   },
 ];
 

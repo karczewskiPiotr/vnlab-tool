@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './Settings.scss';
 import Select from 'react-select';
 import userPlaceholder from './user.svg'
 import imagePlaceholder from './placeholderImg.svg'
+import projectImg from './projectImg.svg'
+import { projects } from '../ProjectsList/ProjectsList'
 
 const Settings = () => {
   const dispatch = useDispatch();
+
+  const [imgPreview, setImgPreview] = useState(null);
 
   const selectOptions = [
     {value: 'Programmer', label: 'Programmer'},
@@ -14,26 +18,49 @@ const Settings = () => {
     {value: 'Publisher', label: 'Publisher'},
   ]
 
+  //Get random project to display as selected
+  var project = projects[Math.floor(Math.random() * projects.length)];
+  
+  const imageSelect = (e: any) => {
+    const selectedImage = e.target.files[0];
+    const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg', 'image/svg+xml'];
+    if(selectedImage && ALLOWED_TYPES.includes(selectedImage.type)) {
+      alert('Image added successfully');
+      let reader = new FileReader();
+      reader.onloadend = () => {
+        setImgPreview(selectedImage);
+      }
+      reader.readAsDataURL(selectedImage);
+    }
+    else {
+      alert('File not supprted');
+    }
+  }
+
   return( 
     <div className="settings__wrapper">
       <h1 className="settings__heading">Project settings</h1>
 
       <div className="settings__row">
         <div>
-          {/* TODO: dynamic image source */}
+          {/* TODO: dynamic image source based on state*/}
           <img src={imagePlaceholder} alt="placeholder image" className="settings__placeholder-img"/>
-          <input type="file" id="settings__image-file" />
+          {
+            imgPreview
+            ? <button className="settings__button" onClick={() => setImgPreview(null)}>Remove</button>
+            : <input type="file" id="settings__image-file" onChange={imageSelect}/>
+          }
         </div>
         <form id="settings__project-name" className="settings__column">
           <label htmlFor="project-name">Project name</label>
-          <input className="text-field" type="text" name="project-name" placeholder="Name"/>
+          <input className="text-field" type="text" name="project-name" placeholder="Name" defaultValue={project.name}/>
         </form>
       </div>
 
       <div className="settings__row">
         <form id="settings__project-description" className="settings__column">
           <label htmlFor="project-description">Project description</label>
-          <textarea className="text-field" name="project-description" placeholder="Description" rows={8}/>
+          <textarea className="text-field" name="project-description" placeholder="Description" rows={8} defaultValue={project.description}/>
         </form>
       </div>
 

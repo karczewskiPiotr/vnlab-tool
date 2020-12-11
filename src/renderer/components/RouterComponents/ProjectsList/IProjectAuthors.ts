@@ -1,5 +1,6 @@
-export interface Author {
-    name: string,
-    role: string,
+export type Author = {
+    name: string;
+    role: string;
+    avatar: string;
   }
   
