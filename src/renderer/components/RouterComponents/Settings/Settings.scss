@@ -1,3 +1,7 @@
+.no-margin {
+    margin: 0 !important;
+}
+
 .settings__row {
     display: flex;
     justify-content: space-around;
@@ -26,6 +30,14 @@
     border-radius: 5px;
     padding: 10px 5px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, .2);
+    font-size: .95rem;
+    margin-bottom: 10px;
+}
+
+.settings__edit-icon { 
+    text-align: right;
+    max-width: 15px;
+    cursor: pointer;
 }
 
 .settings__button {

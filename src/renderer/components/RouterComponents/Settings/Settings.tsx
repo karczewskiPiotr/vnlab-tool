@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux';
 import './Settings.scss';
 import Select from 'react-select';
 import userPlaceholder from './user.svg'
+import editIcon from './edit.svg'
 import imagePlaceholder from './placeholderImg.svg'
-import projectImg from './projectImg.svg'
 import { projects } from '../ProjectsList/ProjectsList'
 
 const Settings = () => {
@@ -43,24 +43,26 @@ const Settings = () => {
 
       <div className="settings__row">
         <div>
-          {/* TODO: dynamic image source based on state*/}
-          <img src={imagePlaceholder} alt="placeholder image" className="settings__placeholder-img"/>
+          {/* TODO: fix dynamic image source based on state*/}
+          <img src={imgPreview ? imgPreview : imagePlaceholder} alt="placeholder image" className="settings__placeholder-img"/>
           {
             imgPreview
-            ? <button className="settings__button" onClick={() => setImgPreview(null)}>Remove</button>
+            ? <button className="settings__button" onClick={() => {setImgPreview(null); console.log(imgPreview);}}>Remove</button>
             : <input type="file" id="settings__image-file" onChange={imageSelect}/>
           }
         </div>
         <form id="settings__project-name" className="settings__column">
           <label htmlFor="project-name">Project name</label>
-          <input className="text-field" type="text" name="project-name" placeholder="Name" defaultValue={project.name}/>
+          <input className="text-field" type="text" name="project-name" placeholder="Name" value={project.name}/>
+          <button className="settings__button"><img src={editIcon} className="settings__edit-icon"/></button>
         </form>
       </div>
 
       <div className="settings__row">
         <form id="settings__project-description" className="settings__column">
           <label htmlFor="project-description">Project description</label>
-          <textarea className="text-field" name="project-description" placeholder="Description" rows={8} defaultValue={project.description}/>
+          <textarea className="text-field" name="project-description" placeholder="Description" rows={8} value={project.description}/>
+          <button className="settings__button"><img src={editIcon} className="settings__edit-icon"/></button>
         </form>
       </div>
 
@@ -68,7 +70,7 @@ const Settings = () => {
         <form id="settings__project-collaborators" className="settings__column">
           <label htmlFor="username">Add a collaborator</label>
           <div className="settings__row">
-            <input className="text-field" type="text" placeholder="enter username" name="username"/>
+            <input className="text-field no-margin" type="text" placeholder="enter username" name="username"/>
             <Select options={selectOptions} className="settings__select-colaborator" placeholder="choose a role"/>
             <button className="settings__button">ADD</button>
           </div>
