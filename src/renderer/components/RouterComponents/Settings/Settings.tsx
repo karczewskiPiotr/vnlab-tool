@@ -25,7 +25,6 @@ const Settings = () => {
     const selectedImage = e.target.files[0];
     const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg', 'image/svg+xml'];
     if(selectedImage && ALLOWED_TYPES.includes(selectedImage.type)) {
-      alert('Image added successfully');
       let reader = new FileReader();
       reader.onloadend = () => {
         setImgPreview(selectedImage);
