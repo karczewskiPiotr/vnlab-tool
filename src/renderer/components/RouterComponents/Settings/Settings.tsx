@@ -4,9 +4,10 @@ import './Settings.scss';
 import Select from 'react-select';
 import userPlaceholder from './user.svg'
 import editIcon from './edit.svg'
+import saveIcon from './floppy-disk.svg'
 import imagePlaceholder from './placeholderImg.svg'
 import { projects } from '../ProjectsList/ProjectsList'
-import { selectProject } from '../../../../shared/slices/projectsSlice';
+import { projectUpdatedDescription, projectUpdatedImage, projectUpdatedName, selectProject } from '../../../../shared/slices/projectsSlice';
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,9 @@ const Settings = () => {
 
   return( 
     <div className="settings__wrapper">
-      <button className="settings__button" onClick={() => dispatch(selectProject(project))}>TEST</button>
+      <button className="settings__button" onClick={() => dispatch(projectUpdatedImage(project.image))}>Update image</button>
+      <button className="settings__button" onClick={() => dispatch(projectUpdatedName(project.name))}>Update name</button>
+      <button className="settings__button" onClick={() => dispatch(projectUpdatedDescription(project.description))}>Update description</button>
       <h1 className="settings__heading">Project settings</h1>
 
       <div className="settings__row">

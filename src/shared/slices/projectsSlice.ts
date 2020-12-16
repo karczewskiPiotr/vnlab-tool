@@ -34,29 +34,45 @@ type Projects = {
 
 const initialState: Projects = {
     projects: null,
-    selectedProject: null,
+    selectedProject: 
+    {
+      id: null,
+      image: null,
+      name: null,
+      date_creation: null,
+      date_edition: null,
+      tags: null,
+      last_modified_by: null,
+      description: null,
+      technologies: null,
+      coauthors: null,
+      state: null
+  },
 }
-
-//What is 'Projects/projectSelected' alias exactly, where to specify it. Returns error
-// export const selectProject =  createAsyncActionMain<string>('projectSelected', () => {
-//     return async (dispatch) => {
-//         const project = projects[Math.floor(Math.random() * projects.length)];
-//         dispatch(projectSelected(project));
-//         console.log('[Function] Project: ' + project);
-//     }
-// });
 
 const projectsSlice = createSlice({
     name: 'projects',
     initialState: initialState,
     reducers: {
         selectProject: (state: Projects, action: PayloadAction<Project>) => {
-            state.selectedProject = action.payload;
-            console.log('[Reducer] State : ', state.selectedProject);
-            console.log('[Reducer] Action payload : ', action.payload);
+          console.log('Project old: ', state.selectedProject);
+          state.selectedProject = action.payload;
+          console.log('Project new: ', state.selectedProject);
         },
-        projectUpdated: (state: Projects, action: PayloadAction<Project>) => {
-            //1 reducer for all updates or multiple for each modification?
+        projectUpdatedImage: (state: Projects, action: PayloadAction<string>) => {
+          console.log('Old img : ', state.selectedProject.image);
+          state.selectedProject.image = action.payload;
+          console.log('New img : ', state.selectedProject.image);
+        },
+        projectUpdatedName: (state: Projects, action: PayloadAction<string>) => {
+          console.log('Old name : ', state.selectedProject.name);
+          state.selectedProject.name = action.payload;
+          console.log('New name : ', state.selectedProject.name);
+        },
+        projectUpdatedDescription: (state: Projects, action: PayloadAction<string>) => {
+          console.log('Old description : ', state.selectedProject.description);
+          state.selectedProject.description = action.payload;
+          console.log('New description : ', state.selectedProject.description);
         },
         newProjectAdded: () => {
             //Code
@@ -133,7 +149,9 @@ const projects: Project[] = [
   ];
 
 export const {
-    projectUpdated,
+    projectUpdatedImage,
+    projectUpdatedName,
+    projectUpdatedDescription,
     newProjectAdded,
     selectProject,
 } = projectsSlice.actions;
