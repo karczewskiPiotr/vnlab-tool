@@ -1,5 +1,5 @@
+import {EndPointParameters, ScopeParamValues, Url} from "./gitTypes";
 import axios from 'axios';
-import { Url } from './gitTypes';
 import { BrowserWindow, session } from 'electron';
 import { appendLog } from '../logger';
 
