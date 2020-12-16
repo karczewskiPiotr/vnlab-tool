@@ -6,6 +6,7 @@ import userPlaceholder from './user.svg'
 import editIcon from './edit.svg'
 import imagePlaceholder from './placeholderImg.svg'
 import { projects } from '../ProjectsList/ProjectsList'
+import { selectProject } from '../../../../shared/slices/projectsSlice';
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const Settings = () => {
         setImgPreview(selectedImage);
       }
       reader.readAsDataURL(selectedImage);
+      console.log(e);
     }
     else {
       alert('File not supprted');
@@ -38,6 +40,7 @@ const Settings = () => {
 
   return( 
     <div className="settings__wrapper">
+      <button className="settings__button" onClick={() => dispatch(selectProject(project))}>TEST</button>
       <h1 className="settings__heading">Project settings</h1>
 
       <div className="settings__row">
@@ -47,7 +50,7 @@ const Settings = () => {
           {
             imgPreview
             ? <button className="settings__button" onClick={() => {setImgPreview(null); console.log(imgPreview);}}>Remove</button>
-            : <input type="file" id="settings__image-file" onChange={imageSelect}/>
+            : <input type="file" id="settings__image-file" onChange={imageSelect}/> //electron way (image)
           }
         </div>
         <form id="settings__project-name" className="settings__column">

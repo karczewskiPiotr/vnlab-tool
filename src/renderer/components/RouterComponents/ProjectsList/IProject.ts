@@ -1,3 +1,4 @@
+import { Author } from './IProjectAuthors';
 import { State } from './IProjectState';
 
 export interface IProject {
@@ -10,6 +11,6 @@ export interface IProject {
   last_modified_by: string;
   description: string;
   technologies: string[];
-  coauthors: string[];
+  coauthors: Author[];
   state: State;
 }
