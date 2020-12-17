@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './Settings.scss';
 import Select from 'react-select';
 import userPlaceholder from './user.svg'
 import editIcon from './edit.svg'
 import saveIcon from './floppy-disk.svg'
 import imagePlaceholder from './placeholderImg.svg'
-import { projects } from '../ProjectsList/ProjectsList'
-import { projectUpdatedDescription, projectUpdatedImage, projectUpdatedName, selectProject } from '../../../../shared/slices/projectsSlice';
+import { projectUpdatedDescription, projectUpdatedImage, projectUpdatedName, selectedProject } from '../../../../shared/slices/projectsSlice';
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -20,19 +19,18 @@ const Settings = () => {
     {value: 'Publisher', label: 'Publisher'},
   ]
 
-  //Get random project to display as selected
-  var project = projects[Math.floor(Math.random() * projects.length)];
+  const project = useSelector(selectedProject);
   
   const imageSelect = (e: any) => {
     const selectedImage = e.target.files[0];
     const ALLOWED_TYPES = ['image/png', 'image/jpeg', 'image/jpg', 'image/svg', 'image/svg+xml'];
     if(selectedImage && ALLOWED_TYPES.includes(selectedImage.type)) {
+      dispatch(projectUpdatedImage(selectedImage.name))
       let reader = new FileReader();
       reader.onloadend = () => {
         setImgPreview(selectedImage);
       }
       reader.readAsDataURL(selectedImage);
-      console.log(e);
     }
     else {
       alert('File not supprted');
@@ -41,11 +39,7 @@ const Settings = () => {
 
   return( 
     <div className="settings__wrapper">
-      <button className="settings__button" onClick={() => dispatch(projectUpdatedImage(project.image))}>Update image</button>
-      <button className="settings__button" onClick={() => dispatch(projectUpdatedName(project.name))}>Update name</button>
-      <button className="settings__button" onClick={() => dispatch(projectUpdatedDescription(project.description))}>Update description</button>
       <h1 className="settings__heading">Project settings</h1>
-
       <div className="settings__row">
         <div>
           {/* TODO: fix dynamic image source based on state*/}
@@ -58,7 +52,7 @@ const Settings = () => {
         </div>
         <form id="settings__project-name" className="settings__column">
           <label htmlFor="project-name">Project name</label>
-          <input className="text-field" type="text" name="project-name" placeholder="Name" value={project.name}/>
+          <input className="text-field" type="text" name="project-name" placeholder="Name" defaultValue={project.name} onChange={(e) => dispatch(projectUpdatedName(e.target.value))}/>
           <button className="settings__button"><img src={editIcon} className="settings__edit-icon"/></button>
         </form>
       </div>
@@ -66,7 +60,7 @@ const Settings = () => {
       <div className="settings__row">
         <form id="settings__project-description" className="settings__column">
           <label htmlFor="project-description">Project description</label>
-          <textarea className="text-field" name="project-description" placeholder="Description" rows={8} value={project.description}/>
+          <textarea className="text-field" name="project-description" placeholder="Description" rows={8} defaultValue={project.description} onChange={(e) => dispatch(projectUpdatedDescription(e.target.value))}/>
           <button className="settings__button"><img src={editIcon} className="settings__edit-icon"/></button>
         </form>
       </div>

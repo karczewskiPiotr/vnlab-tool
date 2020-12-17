@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { createActionMain, createAsyncActionMain } from '../helpers/createActionMain';
+import { RootState } from '../rootReducer';
+import userPlaceholder from '../../renderer/components/RouterComponents/Settings/user.svg'
+import editIcon from '../../renderer/components/RouterComponents/Settings/edit.svg'
+import saveIcon from '../../renderer/components/RouterComponents/Settings/floppy-disk.svg'
+import imagePlaceholder from '../../renderer/components/RouterComponents/Settings/placeholderImg.svg'
 
 //TODO: modify projects list after slice is finished
 enum State {
@@ -32,22 +36,77 @@ type Projects = {
     selectedProject: Project;
 }
 
+const projects: Project[] = [
+  {
+    id: 0,
+    image: null,
+    name: 'Jaś i Małgosia',
+    date_creation: new Date(2018, 10, 31).toString(),
+    date_edition: new Date(2018, 10, 31).toString(),
+    tags: ['TAG A', 'TAG B'],
+    state: State.Cloned,
+    last_modified_by: '',
+    technologies: [],
+    coauthors: [],
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+  },
+  {
+    id: 1,
+    image: null,
+    name: 'Epoka Lodowcowa',
+    date_creation: new Date(2018, 12, 31).toString(),
+    date_edition: new Date(2018, 10, 30).toString(),
+    tags: ['TAG C', 'TAG A', 'TAG D'],
+    state: State.Cloned,
+    last_modified_by: '',
+    technologies: [],
+    coauthors: [],
+    description: 'Suspendisse non rhoncus augue.',
+  },
+  {
+    id: 2,
+    image: null,
+    name: 'Kraina Lodu',
+    date_creation: new Date(1998, 2, 31).toString(),
+    date_edition: new Date(2018, 10, 29).toString(),
+    tags: ['TAG C', 'TAG A', 'TAG D'],
+    state: State.Cloned,
+    last_modified_by: '',
+    technologies: [],
+    coauthors: [],
+    description: 'Maecenas et felis eget velit scelerisque dictum sed vel leo.',
+  },
+  {
+    id: 3,
+    image: null,
+    name: 'Harry Potter',
+    date_creation: new Date(1999, 3, 31).toString(),
+    date_edition: new Date(2018, 10, 28).toString(),
+    tags: ['TAG C', 'TAG A', 'TAG D'],
+    state: State.Cloned,
+    last_modified_by: '',
+    technologies: [],
+    coauthors: [],
+    description: 'Etiam ipsum sem, suscipit eu nunc ut, mollis molestie erat.',
+  },
+  {
+    id: 4,
+    image: null,
+    name: 'Mad Max',
+    date_creation: new Date(2018, 12, 31).toString(),
+    date_edition: new Date(2018, 10, 27).toString(),
+    tags: ['TAG C', 'TAG A', 'TAG D'],
+    state: State.NotCloned,
+    last_modified_by: '',
+    technologies: [],
+    coauthors: [],
+    description: 'Duis fringilla, tellus bibendum tristique sodales, arcu nibh suscipit nunc, eget cursus justo mauris sed urna.',
+  },
+];
+
 const initialState: Projects = {
     projects: null,
-    selectedProject: 
-    {
-      id: null,
-      image: null,
-      name: null,
-      date_creation: null,
-      date_edition: null,
-      tags: null,
-      last_modified_by: null,
-      description: null,
-      technologies: null,
-      coauthors: null,
-      state: null
-  },
+    selectedProject: projects[3],
 }
 
 const projectsSlice = createSlice({
@@ -80,74 +139,6 @@ const projectsSlice = createSlice({
     }
 });
 
-const projects: Project[] = [
-    {
-      id: 0,
-      image: null,
-      name: 'Jaś i Małgosia',
-      date_creation: new Date(2018, 10, 31).toString(),
-      date_edition: new Date(2018, 10, 31).toString(),
-      tags: ['TAG A', 'TAG B'],
-      state: State.Cloned,
-      last_modified_by: '',
-      technologies: [],
-      coauthors: [],
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    },
-    {
-      id: 1,
-      image: null,
-      name: 'Epoka Lodowcowa',
-      date_creation: new Date(2018, 12, 31).toString(),
-      date_edition: new Date(2018, 10, 30).toString(),
-      tags: ['TAG C', 'TAG A', 'TAG D'],
-      state: State.Cloned,
-      last_modified_by: '',
-      technologies: [],
-      coauthors: [],
-      description: 'Suspendisse non rhoncus augue.',
-    },
-    {
-      id: 2,
-      image: null,
-      name: 'Kraina Lodu',
-      date_creation: new Date(1998, 2, 31).toString(),
-      date_edition: new Date(2018, 10, 29).toString(),
-      tags: ['TAG C', 'TAG A', 'TAG D'],
-      state: State.Cloned,
-      last_modified_by: '',
-      technologies: [],
-      coauthors: [],
-      description: 'Maecenas et felis eget velit scelerisque dictum sed vel leo.',
-    },
-    {
-      id: 3,
-      image: null,
-      name: 'Harry Potter',
-      date_creation: new Date(1999, 3, 31).toString(),
-      date_edition: new Date(2018, 10, 28).toString(),
-      tags: ['TAG C', 'TAG A', 'TAG D'],
-      state: State.Cloned,
-      last_modified_by: '',
-      technologies: [],
-      coauthors: [],
-      description: 'Etiam ipsum sem, suscipit eu nunc ut, mollis molestie erat.',
-    },
-    {
-      id: 4,
-      image: null,
-      name: 'Mad Max',
-      date_creation: new Date(2018, 12, 31).toString(),
-      date_edition: new Date(2018, 10, 27).toString(),
-      tags: ['TAG C', 'TAG A', 'TAG D'],
-      state: State.NotCloned,
-      last_modified_by: '',
-      technologies: [],
-      coauthors: [],
-      description: 'Duis fringilla, tellus bibendum tristique sodales, arcu nibh suscipit nunc, eget cursus justo mauris sed urna. Donec imperdiet ultricies nisl, vitae viverra quam vestibulum a. Aliquam sapien diam, pulvinar ac ex id, feugiat volutpat urna. Integer id fringilla risus, vel sodales tellus. Quisque ac neque metus. Aenean at mi molestie, bibendum est sed, viverra metus. Maecenas mauris est, tincidunt eu nunc in, sodales feugiat massa. Fusce euismod ut ligula in accumsan. Morbi consequat lorem in odio lacinia ultricies. In et nisl et ligula malesuada posuere.',
-    },
-  ];
-
 export const {
     projectUpdatedImage,
     projectUpdatedName,
@@ -155,5 +146,7 @@ export const {
     newProjectAdded,
     selectProject,
 } = projectsSlice.actions;
+
+export const selectedProject = (state: RootState) => state.projects.selectedProject;
 
 export default projectsSlice.reducer;
