@@ -4,7 +4,6 @@ import './Settings.scss';
 import Select from 'react-select';
 import userPlaceholder from './user.svg'
 import editIcon from './edit.svg'
-import saveIcon from './floppy-disk.svg'
 import imagePlaceholder from './placeholderImg.svg'
 import { projectUpdatedDescription, projectUpdatedImage, projectUpdatedName, selectedProject } from '../../../../shared/slices/projectsSlice';
 
@@ -37,92 +36,70 @@ const Settings = () => {
     }
   }
 
-  return( 
+  return(
     <div className="settings__wrapper">
-      <h1 className="settings__heading">Project settings</h1>
       <div className="settings__row">
-        <div>
+        <h1 className="settings__heading">First Publication's Title</h1>
+      </div>
+      <div className="settings__row">
+        <div className="settings__column">
+          <h3 className="settings__subheading">Project photo:</h3>
           {/* TODO: fix dynamic image source based on state*/}
-          <img src={imgPreview ? imgPreview : imagePlaceholder} alt="placeholder image" className="settings__placeholder-img"/>
+          <img src={imgPreview ? imgPreview : 'https://picsum.photos/200'} alt="placeholder image" className="settings__placeholder-img"/>
           {
             imgPreview
             ? <button className="settings__button" onClick={() => {setImgPreview(null); console.log(imgPreview);}}>Remove</button>
             : <input type="file" id="settings__image-file" onChange={imageSelect}/> //electron way (image)
           }
         </div>
-        <form id="settings__project-name" className="settings__column">
-          <label htmlFor="project-name">Project name</label>
-          <input className="text-field" type="text" name="project-name" placeholder="Name" defaultValue={project.name} onChange={(e) => dispatch(projectUpdatedName(e.target.value))}/>
-          <button className="settings__button"><img src={editIcon} className="settings__edit-icon"/></button>
+        <div className="settings__column">
+          <h3 className="settings__subheading">Project name:</h3>
+          <form id="settings__project-name">
+            <input className="text-field" type="text" name="project-name" placeholder="Name" defaultValue={project.name} onChange={(e) => dispatch(projectUpdatedName(e.target.value))}/>
+          </form>
+          <h3 className="settings__subheading">Project description:</h3>
+          <form id="settings__project-description">
+          <textarea className="text-field" name="project-description" placeholder="Description" rows={20} defaultValue={project.description} onChange={(e) => dispatch(projectUpdatedDescription(e.target.value))}/>
         </form>
+        </div>
       </div>
-
       <div className="settings__row">
-        <form id="settings__project-description" className="settings__column">
-          <label htmlFor="project-description">Project description</label>
-          <textarea className="text-field" name="project-description" placeholder="Description" rows={8} defaultValue={project.description} onChange={(e) => dispatch(projectUpdatedDescription(e.target.value))}/>
-          <button className="settings__button"><img src={editIcon} className="settings__edit-icon"/></button>
-        </form>
-      </div>
-
-      <div className="settings__row">
-        <form id="settings__project-collaborators" className="settings__column">
-          <label htmlFor="username">Add a collaborator</label>
-          <div className="settings__row">
-            <input className="text-field no-margin" type="text" placeholder="enter username" name="username"/>
-            <Select options={selectOptions} className="settings__select-colaborator" placeholder="choose a role"/>
-            <button className="settings__button">ADD</button>
-          </div>
-        </form>
-      </div>
-
-      <div className="settings__row">
-        <div className="settings__colaborators-list-wrapper settings__column">
-          <label>Collaborators</label>
+        <div className="settings__column">
+          <h3 className="settings__subheading">Collaborators:</h3>
+          <div className="settings__colaborators-list-wrapper">
           <ul className="settings__colaborators-list">
             <li>
               <img src={userPlaceholder} alt="collaborator icon"/>
               <span>Username</span>
               <span>Role</span>
-              <button className="settings__button">X</button>
+              <button>X</button>
             </li>
             <li>
               <img src={userPlaceholder} alt="collaborator icon"/>
               <span>Username</span>
               <span>Role</span>
-              <button className="settings__button">X</button>
+              <button>X</button>
             </li>
             <li>
               <img src={userPlaceholder} alt="collaborator icon"/>
               <span>Username</span>
               <span>Role</span>
-              <button className="settings__button">X</button>
+              <button>X</button>
             </li>
             <li>
               <img src={userPlaceholder} alt="collaborator icon"/>
               <span>Username</span>
               <span>Role</span>
-              <button className="settings__button">X</button>
-            </li>
-            <li>
-              <img src={userPlaceholder} alt="collaborator icon"/>
-              <span>Username</span>
-              <span>Role</span>
-              <button className="settings__button">X</button>
-            </li>
-            <li>
-              <img src={userPlaceholder} alt="collaborator icon"/>
-              <span>Username</span>
-              <span>Role</span>
-              <button className="settings__button">X</button>
-            </li>
-            <li>
-              <img src={userPlaceholder} alt="collaborator icon"/>
-              <span>Username</span>
-              <span>Role</span>
-              <button className="settings__button">X</button>
+              <button>X</button>
             </li>
           </ul>
+          <button className="settings__button">Add a collaborator</button>
+        </div>
+          {/* <form id="settings__project-collaborators">
+            <input className="text-field" type="text" placeholder="Username..." name="username"/>
+            <Select options={selectOptions} className="settings__select-colaborator" placeholder="Role:"/>
+            <button className="settings__button">ADD</button>
+          </form> */}
         </div>
       </div>
     </div>
