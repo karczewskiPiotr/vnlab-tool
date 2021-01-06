@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Settings.scss';
 import Select from 'react-select';
+<<<<<<< HEAD
 import { newCollaboratorAdded, projectUpdatedDescription, projectUpdatedImage, projectUpdatedName, selectedProject, Author } from '../../../../shared/slices/projectsSlice';
+=======
+import { projectCollaboratorsName, projectCollaboratorsRole, projectUpdatedDescription, projectUpdatedImage, projectUpdatedName, selectedProject } from '../../../../shared/slices/projectsSlice';
+>>>>>>> 2c76b97df092607f1e9f6cabef8fb24fd953359c
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -20,6 +24,18 @@ const Settings = () => {
     {value: 'Writer', label: 'Writer'},
     {value: 'Publisher', label: 'Publisher'},
   ]
+<<<<<<< HEAD
+=======
+
+  const collaborators = [
+    {name:"Freddy", role:"Author", avatar:"https://picsum.photos/100"},
+    {name:"Tom", role:"Programmer", avatar:"https://picsum.photos/300"},
+    {name:"Mark", role:"Publishser", avatar:"https://picsum.photos/400"},
+  ]
+
+  const project = useSelector(selectedProject);
+
+>>>>>>> 2c76b97df092607f1e9f6cabef8fb24fd953359c
   
   const imageSelect = (e: any) => {
     const selectedImage = e.target.files[0];
@@ -37,6 +53,7 @@ const Settings = () => {
     }
   }
 
+<<<<<<< HEAD
   const updateProject = ( projName: string, projDesc : string) => {
     if(projName === null) {
       dispatch(projectUpdatedDescription(projDesc));
@@ -52,6 +69,24 @@ const Settings = () => {
 
   const addColaborator = (collaborator: Author) => {
     dispatch(newCollaboratorAdded(collaborator));
+=======
+  const updateProject = (name: string, desc : string) => {
+    if(name === null) {
+      dispatch(projectUpdatedDescription(desc));
+    }
+    else if(desc === null) {
+      dispatch(projectUpdatedName(name));
+    }
+    else {
+      dispatch(projectUpdatedName(name));
+      dispatch(projectUpdatedDescription(desc));
+    }
+  }
+
+  const addColaborator = (name: string, role : string) => {
+    dispatch(projectCollaboratorsName(name));
+    dispatch(projectCollaboratorsRole(role));
+>>>>>>> 2c76b97df092607f1e9f6cabef8fb24fd953359c
   }
 
   return(
@@ -73,11 +108,19 @@ const Settings = () => {
         <div className="settings__column">
           <h3 className="settings__subheading">Project name:</h3>
           <form id="settings__project-name">
+<<<<<<< HEAD
             <input className="text-field" type="text" name="project-name" placeholder="Name" defaultValue={currentProject.name} onChange={(e) => setProjectName(e.target.value)}/>
           </form>
           <h3 className="settings__subheading">Project description:</h3>
           <form id="settings__project-description">
           <textarea className="text-field" name="project-description" placeholder="Description" rows={20} defaultValue={currentProject.description} onChange={(e) => setProjectDescription(e.target.value)}/>
+=======
+            <input className="text-field" type="text" name="project-name" placeholder="Name" defaultValue={project.name} onChange={(e) => setProjectName(e.target.value)}/>
+          </form>
+          <h3 className="settings__subheading">Project description:</h3>
+          <form id="settings__project-description">
+          <textarea className="text-field" name="project-description" placeholder="Description" rows={20} defaultValue={project.description} onChange={(e) => setProjectDescription(e.target.value)}/>
+>>>>>>> 2c76b97df092607f1e9f6cabef8fb24fd953359c
         </form>
         </div>
       </div>
@@ -94,7 +137,11 @@ const Settings = () => {
                   <th></th>
                 </tr>
                 {
+<<<<<<< HEAD
                   currentProject.coauthors.map((collaborator) => (
+=======
+                  collaborators.map((collaborator) => (
+>>>>>>> 2c76b97df092607f1e9f6cabef8fb24fd953359c
                     <tr key={collaborator.name}> 
                       <td><img src={collaborator.avatar} alt="collaborator icon"/></td>
                       <td><span>{collaborator.name}</span></td>
