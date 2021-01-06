@@ -120,20 +120,20 @@ const initialState: Projects = {
     selectedProject: projects[3],
 }
 
-const au: Author = {
-  name:"",
-  role:"",
-  avatar:""
-}
+// const au: Author = {
+//   name:"",
+//   role:"",
+//   avatar:""
+// }
 
-let au2 = Object.create(au);
+let au2 = Object.create({});
 au2 = {
   name:"",
   role:"",
   avatar:""
 }
 
-let n=0;
+let n = 0;
 
 const projectsSlice = createSlice({
     name: 'projects',
@@ -157,16 +157,23 @@ const projectsSlice = createSlice({
         newProjectAdded: () => {
             //Code
         },
-        projectCollaboratorsName: (state: Projects, action: PayloadAction<string>) => {
-          
-          state.selectedProject.coauthors[0+n].name=action.payload; 
-      },
-      projectCollaboratorsRole: (state: Projects, action: PayloadAction<string>) => {
-        state.selectedProject.coauthors[0+n].role=action.payload;  
-        state.selectedProject.coauthors.push(au2);
-        n = n+1;
-        console.log(console.log(JSON.stringify(state, undefined, 2)));
-      },
+        newCollaboratorAdded: (state: Projects, action: PayloadAction<Author>) => {
+          state.selectedProject.coauthors[n].name=action.payload.name;
+          state.selectedProject.coauthors[n].role=action.payload.role;
+          state.selectedProject.coauthors[n].avatar=action.payload.avatar;
+          state.selectedProject.coauthors.push(au2);
+          n = n+1;
+        }        
+        
+        //   projectCollaboratorsName: (state: Projects, action: PayloadAction<string>) => {
+        //     state.selectedProject.coauthors[n].name=action.payload;
+        // },
+        // projectCollaboratorsRole: (state: Projects, action: PayloadAction<string>) => {
+        //   state.selectedProject.coauthors[n].role=action.payload;
+        //   state.selectedProject.coauthors.push(au2);
+        //   n = n+1;
+        //   console.log(console.log(JSON.stringify(state, undefined, 2)));
+        // },
         // projectCollaboratorsAvatar: (state: Projects, action: PayloadAction<string>) => {
         //   state.selectedProject.coauthors.avatar = action.payload;
         // },
@@ -178,8 +185,7 @@ export const {
     projectUpdatedName,
     projectUpdatedDescription,
     newProjectAdded,
-    projectCollaboratorsName,
-    projectCollaboratorsRole,
+    newCollaboratorAdded,
     selectProject,
 } = projectsSlice.actions;
 
