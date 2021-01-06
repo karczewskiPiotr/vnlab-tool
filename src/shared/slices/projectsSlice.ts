@@ -120,11 +120,26 @@ const initialState: Projects = {
     selectedProject: projects[3],
 }
 
+const au: Author = {
+  name:"",
+  role:"",
+  avatar:""
+}
+
+let au2 = Object.create(au);
+au2 = {
+  name:"",
+  role:"",
+  avatar:""
+}
+
+let n=0;
 
 const projectsSlice = createSlice({
     name: 'projects',
     initialState: initialState,
     reducers: {
+      
         selectProject: (state: Projects, action: PayloadAction<Project>) => {
           console.log('Project old: ', state.selectedProject);
           state.selectedProject = action.payload;
@@ -143,16 +158,15 @@ const projectsSlice = createSlice({
             //Code
         },
         projectCollaboratorsName: (state: Projects, action: PayloadAction<string>) => {
-            [...state.selectedProject.coauthors].forEach(function(author){
-            author.name = action.payload;
-          })
-        },
-        projectCollaboratorsRole: (state: Projects, action: PayloadAction<string>) => {
-          console.log(console.log(JSON.stringify(state, undefined, 2)));
-          [...state.selectedProject.coauthors].forEach(function(author){
-            author.role = action.payload;
-          })
-        },
+          
+          state.selectedProject.coauthors[0+n].name=action.payload; 
+      },
+      projectCollaboratorsRole: (state: Projects, action: PayloadAction<string>) => {
+        state.selectedProject.coauthors[0+n].role=action.payload;  
+        state.selectedProject.coauthors.push(au2);
+        n = n+1;
+        console.log(console.log(JSON.stringify(state, undefined, 2)));
+      },
         // projectCollaboratorsAvatar: (state: Projects, action: PayloadAction<string>) => {
         //   state.selectedProject.coauthors.avatar = action.payload;
         // },
