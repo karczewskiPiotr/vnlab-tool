@@ -78,11 +78,11 @@ $primary-color: #dddddd;
     #settings__image-file {
         color: transparent;
         position: relative;
-        bottom: 95px;
-        left: 60px;
+        bottom: 93px;
+        left: 58px;
         z-index: 10;
-        width: 30px;
-        height: 30px;
+        width: 45px;
+        height: 45px;
         outline: none;
 
         &::-webkit-file-upload-button {
@@ -90,6 +90,9 @@ $primary-color: #dddddd;
         }
 
         &::after {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             content: '+';
             width: 80%;
             height: 80%;
@@ -98,8 +101,7 @@ $primary-color: #dddddd;
             background-color: $primary-color;
             color: $secondary-color;
             position: relative;
-            bottom: 55%;
-            display: inline-block;
+            bottom: 54%;
             outline: none;
             cursor: pointer;
         }
@@ -131,6 +133,25 @@ $primary-color: #dddddd;
             img {
                 width: 35px;
             }
+        }
+        // .settings__add-colaborator {
+        //     display: none;
+        // }
+    }
+    #settings__project-collaborators {
+        width: 100%;
+        display: flex;
+
+        button {
+            margin-top: 0;
+            width: 200px;
+        }
+        input {
+            margin-bottom: 0;
+        }
+        .settings__select-colaborator {
+            height: 45px;
+            width: 25%;
         }
     }
 }
