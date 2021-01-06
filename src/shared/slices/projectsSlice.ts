@@ -11,7 +11,7 @@ enum State {
     NotCloned,
 }
 
-type Author = {
+export type Author = {
     name: string;
     role: string;
     avatar: string;
@@ -27,13 +27,15 @@ export type Project = {
     last_modified_by: string;
     description: string;
     technologies: string[];
-    coauthors: Author[];
+    coauthors: Author;
     state: State;
 }
+
 
 type Projects = {
     projects: Project[];
     selectedProject: Project;
+    coauthors: Author;
 }
 
 const projects: Project[] = [
@@ -47,7 +49,7 @@ const projects: Project[] = [
     state: State.Cloned,
     last_modified_by: '',
     technologies: [],
-    coauthors: [],
+    coauthors: {name:"", role:"", avatar:""},
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
   },
   {
@@ -60,7 +62,7 @@ const projects: Project[] = [
     state: State.Cloned,
     last_modified_by: '',
     technologies: [],
-    coauthors: [],
+    coauthors: {name:"", role:"", avatar:""},
     description: 'Suspendisse non rhoncus augue.',
   },
   {
@@ -73,7 +75,7 @@ const projects: Project[] = [
     state: State.Cloned,
     last_modified_by: '',
     technologies: [],
-    coauthors: [],
+    coauthors: {name:"", role:"", avatar:""},
     description: 'Maecenas et felis eget velit scelerisque dictum sed vel leo.',
   },
   {
@@ -86,7 +88,7 @@ const projects: Project[] = [
     state: State.Cloned,
     last_modified_by: '',
     technologies: [],
-    coauthors: [],
+    coauthors: {name:"", role:"", avatar:""},
     description: 'Etiam ipsum sem, suscipit eu nunc ut, mollis molestie erat.',
   },
   {
@@ -99,7 +101,7 @@ const projects: Project[] = [
     state: State.NotCloned,
     last_modified_by: '',
     technologies: [],
-    coauthors: [],
+    coauthors: {name:"", role:"", avatar:""},
     description: 'Duis fringilla, tellus bibendum tristique sodales, arcu nibh suscipit nunc, eget cursus justo mauris sed urna.',
   },
 ];
@@ -107,7 +109,9 @@ const projects: Project[] = [
 const initialState: Projects = {
     projects: null,
     selectedProject: projects[3],
+    coauthors: projects[3].coauthors,
 }
+
 
 const projectsSlice = createSlice({
     name: 'projects',
@@ -136,6 +140,23 @@ const projectsSlice = createSlice({
         newProjectAdded: () => {
             //Code
         },
+      
+        projectCollaboratorsName: (state: Projects, action: PayloadAction<string>) => {
+          console.log('Old name : ', state.selectedProject.coauthors.name);
+          state.selectedProject.coauthors.name = action.payload;
+          console.log('New name : ', state.selectedProject.coauthors.name);
+        },
+
+        projectCollaboratorsRole: (state: Projects, action: PayloadAction<string>) => {
+          console.log('Old role : ', state.selectedProject.coauthors.role);
+          state.selectedProject.coauthors.role = action.payload;
+          console.log('New role : ', state.selectedProject.coauthors.role);
+        },
+
+        projectCollaboratorsAvatar: (state: Projects, action: PayloadAction<string>) => {
+          state.selectedProject.coauthors.avatar = action.payload;
+        },
+
     }
 });
 
@@ -144,6 +165,9 @@ export const {
     projectUpdatedName,
     projectUpdatedDescription,
     newProjectAdded,
+    projectCollaboratorsName,
+    projectCollaboratorsRole,
+    projectCollaboratorsAvatar,
     selectProject,
 } = projectsSlice.actions;
 

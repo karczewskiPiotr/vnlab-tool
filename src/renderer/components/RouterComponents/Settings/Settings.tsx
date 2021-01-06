@@ -5,7 +5,7 @@ import Select from 'react-select';
 import userPlaceholder from './user.svg'
 import editIcon from './edit.svg'
 import imagePlaceholder from './placeholderImg.svg'
-import { projectUpdatedDescription, projectUpdatedImage, projectUpdatedName, selectedProject } from '../../../../shared/slices/projectsSlice';
+import { projectCollaboratorsName, projectCollaboratorsRole, projectCollaboratorsAvatar, projectUpdatedDescription, projectUpdatedImage, projectUpdatedName, selectedProject } from '../../../../shared/slices/projectsSlice';
 
 const Settings = () => {
   const dispatch = useDispatch();
@@ -19,6 +19,7 @@ const Settings = () => {
   ]
 
   const project = useSelector(selectedProject);
+
   
   const imageSelect = (e: any) => {
     const selectedImage = e.target.files[0];
@@ -66,9 +67,41 @@ const Settings = () => {
       <div className="settings__row">
         <div className="settings__column">
           <h3 className="settings__subheading">Collaborators:</h3>
-          <div className="settings__colaborators-list-wrapper">
-          <ul className="settings__colaborators-list">
+          
+          
             <li>
+            <img src={userPlaceholder} alt="collaborator icon"/><button>DELETE COLLABORATOR</button> <br />
+          <span><input className="text-field" name="author-name" placeholder="Name" defaultValue={"name one"} onChange={(e) => dispatch(projectCollaboratorsName(e.target.value))}/></span>
+          <span><input className="text-field" name="author-role" placeholder="Role" defaultValue={"programmer"} onChange={(e) => dispatch(projectCollaboratorsRole(e.target.value))}/></span>
+          <span><input className="text-field" name="author-avatar" placeholder="Avatar" defaultValue={"avatar one"} onChange={(e) => dispatch(projectCollaboratorsAvatar(e.target.value))}/></span>
+            </li>
+            <li>
+            <img src={userPlaceholder} alt="collaborator icon"/><button>DELETE COLLABORATOR</button> <br />
+          <span><input className="text-field" name="author-name" placeholder="Name" defaultValue={"name two"} onChange={(e) => dispatch(projectCollaboratorsName(e.target.value))}/></span>
+          <span><input className="text-field" name="author-role" placeholder="Role" defaultValue={"writer"} onChange={(e) => dispatch(projectCollaboratorsRole(e.target.value))}/></span>
+          <span><input className="text-field" name="author-avatar" placeholder="Avatar" defaultValue={"avatar two"} onChange={(e) => dispatch(projectCollaboratorsAvatar(e.target.value))}/></span>
+            </li>
+            <li>
+            <img src={userPlaceholder} alt="collaborator icon"/><button>DELETE COLLABORATOR</button> <br />
+          <input className="text-field" name="author-name" placeholder="Name" defaultValue={"empty name"} onChange={(e) => dispatch(projectCollaboratorsName(e.target.value))}/>
+          <input className="text-field" name="author-role" placeholder="Role" defaultValue={"empty role"} onChange={(e) => dispatch(projectCollaboratorsRole(e.target.value))}/>
+          <input className="text-field" name="author-avatar" placeholder="Avatar" defaultValue={"empty avatar"} onChange={(e) => dispatch(projectCollaboratorsAvatar(e.target.value))}/>
+            </li>
+            <li>
+            <img src={userPlaceholder} alt="collaborator icon"/><button>DELETE COLLABORATOR</button> <br />
+          <span><input className="text-field" name="author-name" placeholder="Name" defaultValue={"empty name"} onChange={(e) => dispatch(projectCollaboratorsName(e.target.value))}/></span>
+          <span><input className="text-field" name="author-role" placeholder="Role" defaultValue={"empty role"} onChange={(e) => dispatch(projectCollaboratorsRole(e.target.value))}/></span>
+          <span><input className="text-field" name="author-avatar" placeholder="Avatar" defaultValue={"empty avatar"} onChange={(e) => dispatch(projectCollaboratorsAvatar(e.target.value))}/></span>
+            </li>
+            <li>
+            <img src={userPlaceholder} alt="collaborator icon"/><button>DELETE COLLABORATOR</button> <br />
+          <span><input className="text-field" name="author-name" placeholder="Name" defaultValue={"empty name"} onChange={(e) => dispatch(projectCollaboratorsName(e.target.value))}/></span>
+          <span><input className="text-field" name="author-role" placeholder="Role" defaultValue={"empty role"} onChange={(e) => dispatch(projectCollaboratorsRole(e.target.value))}/></span>
+          <span><input className="text-field" name="author-avatar" placeholder="Avatar" defaultValue={"empty avatar"} onChange={(e) => dispatch(projectCollaboratorsAvatar(e.target.value))}/></span>
+            </li>
+
+            
+            {/* <li>
               <img src={userPlaceholder} alt="collaborator icon"/>
               <span>Username</span>
               <span>Role</span>
@@ -79,20 +112,14 @@ const Settings = () => {
               <span>Username</span>
               <span>Role</span>
               <button>X</button>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <img src={userPlaceholder} alt="collaborator icon"/>
               <span>Username</span>
               <span>Role</span>
               <button>X</button>
-            </li>
-            <li>
-              <img src={userPlaceholder} alt="collaborator icon"/>
-              <span>Username</span>
-              <span>Role</span>
-              <button>X</button>
-            </li>
-          </ul>
+            </li> */}
+         
           <button className="settings__button">Add a collaborator</button>
         </div>
           {/* <form id="settings__project-collaborators">
@@ -102,7 +129,7 @@ const Settings = () => {
           </form> */}
         </div>
       </div>
-    </div>
+   
   );
 };
 
