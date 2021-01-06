@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Settings.scss';
 import Select from 'react-select';
-import userPlaceholder from './user.svg'
 import { projectCollaboratorsName, projectCollaboratorsRole, projectUpdatedDescription, projectUpdatedImage, projectUpdatedName, selectedProject } from '../../../../shared/slices/projectsSlice';
 
 const Settings = () => {
@@ -10,6 +9,8 @@ const Settings = () => {
 
   const [imgPreview, setImgPreview] = useState(null);
   const [isCollaboratorAdded, setIsCollaboratorAdded] = useState(false);
+  const [projectName, setProjectName] = useState(null);
+  const [projectDescription, setProjectDescription] = useState(null);
   const [collaboratorName, setCollaboratorName] = useState(null);
   const [collaboratorRole, setCollaboratorRole] = useState(null);
 
@@ -17,6 +18,12 @@ const Settings = () => {
     {value: 'Programmer', label: 'Programmer'},
     {value: 'Writer', label: 'Writer'},
     {value: 'Publisher', label: 'Publisher'},
+  ]
+
+  const collaborators = [
+    {name:"Freddy", role:"Author", avatar:"https://picsum.photos/100"},
+    {name:"Tom", role:"Programmer", avatar:"https://picsum.photos/300"},
+    {name:"Mark", role:"Publishser", avatar:"https://picsum.photos/400"},
   ]
 
   const project = useSelector(selectedProject);
@@ -35,6 +42,19 @@ const Settings = () => {
     }
     else {
       alert('File not supprted');
+    }
+  }
+
+  const updateProject = (name: string, desc : string) => {
+    if(name === null) {
+      dispatch(projectUpdatedDescription(desc));
+    }
+    else if(desc === null) {
+      dispatch(projectUpdatedName(name));
+    }
+    else {
+      dispatch(projectUpdatedName(name));
+      dispatch(projectUpdatedDescription(desc));
     }
   }
 
@@ -62,26 +82,38 @@ const Settings = () => {
         <div className="settings__column">
           <h3 className="settings__subheading">Project name:</h3>
           <form id="settings__project-name">
-            <input className="text-field" type="text" name="project-name" placeholder="Name" defaultValue={project.name} onChange={(e) => dispatch(projectUpdatedName(e.target.value))}/>
+            <input className="text-field" type="text" name="project-name" placeholder="Name" defaultValue={project.name} onChange={(e) => setProjectName(e.target.value)}/>
           </form>
           <h3 className="settings__subheading">Project description:</h3>
           <form id="settings__project-description">
-          <textarea className="text-field" name="project-description" placeholder="Description" rows={20} defaultValue={project.description} onChange={(e) => dispatch(projectUpdatedDescription(e.target.value))}/>
+          <textarea className="text-field" name="project-description" placeholder="Description" rows={20} defaultValue={project.description} onChange={(e) => setProjectDescription(e.target.value)}/>
         </form>
         </div>
       </div>
+      <hr />
       <div className="settings__row">
-        <div className="settings__column">
           <h3 className="settings__subheading">Collaborators:</h3>
           <div className="settings__colaborators-list-wrapper">
-            <ul className="settings__colaborators-list">
-              <li>
-                <img src={userPlaceholder} alt="collaborator icon"/>
-                <span>Freddy Lichy</span>
-                <span>Programmer</span>
-                <button className="outlined-button">X</button>
-              </li>
-            </ul>
+            <table className="settings__colaborators-list">
+              <tbody>
+                <tr>
+                  <th></th>
+                  <th>Username</th>
+                  <th>Role</th>
+                  <th></th>
+                </tr>
+                {
+                  collaborators.map((collaborator) => (
+                    <tr key={collaborator.name}> 
+                      <td><img src={collaborator.avatar} alt="collaborator icon"/></td>
+                      <td><span>{collaborator.name}</span></td>
+                      <td><span>{collaborator.role}</span></td>
+                      <td><button className="settings__outlined-button">X</button></td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </table>
             {
               isCollaboratorAdded
               ? (<form id="settings__project-collaborators">
@@ -91,34 +123,13 @@ const Settings = () => {
                 </form>)
               : <button onClick={() => setIsCollaboratorAdded(true)} className="settings__button settings__add-colaborator">Add a collaborator</button>
             }
-          </div>
-
-            
-            {/* <Select options={selectOptions} className="settings__select-colaborator" placeholder="Role:"/> */}
-            {/* <li>
-              <img src={userPlaceholder} alt="collaborator icon"/>
-              <span>Username</span>
-              <span>Role</span>
-              <button>X</button>
-            </li>
-            <li>
-              <img src={userPlaceholder} alt="collaborator icon"/>
-              <span>Username</span>
-              <span>Role</span>
-              <button>X</button>
-            </li> */}
-            {/* <li>
-              <img src={userPlaceholder} alt="collaborator icon"/>
-              <span>Username</span>
-              <span>Role</span>
-              <button>X</button>
-            </li> */}
-         
-          
         </div>
       </div>
+      <hr />
+      <div className="settings__row">
+        <button onClick={() => {updateProject(projectName, projectDescription)}} className="settings__button settings__button-primary">SAVE CHANGES TO PROJECT SETTINGS</button>
+      </div>
     </div>
-   
   );
 };
 
