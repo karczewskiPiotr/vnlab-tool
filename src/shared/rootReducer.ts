@@ -5,6 +5,7 @@ import gatsbyInstallReducer from './slices/gatsbyInstallSlice';
 import publicationsReducer from './slices/publicationsSlice';
 import nodeCheckReducer from './slices/nodeCheckSlice';
 import currentViewReducer from './slices/currentViewSlice';
+import directoriesReducer from './slices/directoriesSlice';
 
 const rootReducer = combineReducers({
   currentUser: currentUserReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   gatsbyInstall: gatsbyInstallReducer,
   publications: publicationsReducer,
   currentView: currentViewReducer,
+  currentDirectory: directoriesReducer,
 });
 
 // export state to use with selectors
